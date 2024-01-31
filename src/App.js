@@ -1,24 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import About from './components/About';
+import Contact from './components/Contact';
+import Experience from './components/Experience';
+import Main from './components/Main';
+import Navbar from './components/Navbar';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
+import Footer from './components/Footer';
+import Hamburger from './components/Hamburger';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+
+const theme = createTheme({
+  palette: {
+    ochre: {
+      main: '#000000',
+      light: '#ffffff',
+      dark: '#4e4e4e',
+      contrastText: '#ffffff',
+    },
+  },
+});
 
 function App() {
+  const [isOpen, setOpen] = useState(false);
+  const open = () => {
+    setOpen(!isOpen);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        {isOpen && <Hamburger />}
+        <Navbar open={open} isOpen={isOpen} />
+        <Main />
+        <About />
+        <Projects />
+        <Skills />
+        <Experience />
+        <Contact />
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }
 
